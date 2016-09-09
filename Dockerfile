@@ -20,6 +20,7 @@ RUN apt-get install -y wget links curl rsync bc git git-core apt-transport-https
 RUN apt-get install -y gawk libreadline6-dev libyaml-dev autoconf libgdbm-dev libncurses5-dev automake libtool bison libffi-dev
 RUN apt-get install -y libpq-dev xvfb qt5-default imagemagick libqt5webkit5-dev libldap2-dev libsasl2-dev wkhtmltopdf pdftk libmysqlclient-dev zip libgmp-dev phantomjs
 RUN apt-get install -y postgresql-client
+RUN apt-get install -y openssh-client
 
 ## Nodejs engine
 RUN apt-get install -y nodejs npm
