@@ -30,7 +30,7 @@ RUN apt-get install -y software-properties-common
 RUN apt-add-repository ppa:brightbox/ruby-ng
 RUN apt-get update
 
-RUN apt-get install -y ruby2.1 ruby2.1-dev
+RUN apt-get install -y ruby2.3 ruby2.3-dev
 
 RUN gem install bundler
 
