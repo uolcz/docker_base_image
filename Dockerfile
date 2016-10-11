@@ -32,6 +32,8 @@ RUN apt-get update
 
 RUN apt-get install -y ruby2.1 ruby2.1-dev
 
+RUN apt-get install -y gstreamer1.0-plugins-base gstreamer1.0-tools gstreamer1.0-x
+
 RUN gem install bundler
 
 WORKDIR /app
