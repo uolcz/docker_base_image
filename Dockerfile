@@ -30,7 +30,7 @@ RUN apt-get install -y software-properties-common
 RUN apt-add-repository ppa:brightbox/ruby-ng
 RUN apt-get update
 
-RUN apt-get install -y ruby2.1 ruby2.1-dev
+RUN apt-get install -y ruby2.3 ruby2.3-dev
 
 RUN apt-get install -y gstreamer1.0-plugins-base gstreamer1.0-tools gstreamer1.0-x
 
