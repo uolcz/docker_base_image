@@ -18,7 +18,7 @@ RUN apt-get update
 RUN apt-get install -y build-essential 
 RUN apt-get install -y wget links curl rsync bc git git-core apt-transport-https libxml2 libxml2-dev libcurl4-openssl-dev openssl
 RUN apt-get install -y gawk libreadline6-dev libyaml-dev autoconf libgdbm-dev libncurses5-dev automake libtool bison libffi-dev
-RUN apt-get install -y libpq-dev xvfb qt5-default imagemagick libqt5webkit5-dev libldap2-dev libsasl2-dev wkhtmltopdf pdftk libmysqlclient-dev zip libgmp-dev phantomjs
+RUN apt-get install -y libpq-dev xvfb qt5-default imagemagick libqt5webkit5-dev libldap2-dev libsasl2-dev wkhtmltopdf pdftk libmysqlclient-dev zip libgmp-dev
 RUN apt-get install -y postgresql-client
 RUN apt-get install -y openssh-client
 
@@ -29,6 +29,8 @@ RUN ln -s  /usr/bin/nodejs  /usr/bin/node
 RUN apt-get install -y software-properties-common
 RUN apt-add-repository ppa:brightbox/ruby-ng
 RUN apt-get update
+
+RUN npm install -g phantomjs-prebuilt
 
 RUN apt-get install -y ruby2.3 ruby2.3-dev
 
