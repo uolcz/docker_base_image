@@ -26,14 +26,20 @@ RUN apt-get install -y postgresql-client
 RUN apt-get install -y openssh-client
 
 ## Nodejs engine
-RUN apt-get install -y nodejs npm
-RUN ln -s  /usr/bin/nodejs  /usr/bin/node
+RUN curl -sL https://deb.nodesource.com/setup_6.x | sudo bash -
+RUN apt-get install -y nodejs
+
+## YARN
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+RUN apt-get update
+RUN apt-get install -y yarn
 
 RUN apt-get install -y software-properties-common
 RUN apt-add-repository ppa:brightbox/ruby-ng
 RUN apt-get update
 
-RUN npm install -g phantomjs-prebuilt
+RUN yarn global add phantomjs-prebuilt
 
 RUN apt-get install -y ruby2.3 ruby2.3-dev
 
