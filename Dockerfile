@@ -19,15 +19,18 @@ RUN dpkg-reconfigure locales
 ENV TZ=Europe/Prague
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
-RUN apt-get update
-
 ## Default Packages
 RUN apt-get install -y build-essential
 RUN apt-get install -y wget links curl rsync bc git git-core apt-transport-https libxml2 libxml2-dev libcurl4-openssl-dev openssl
 RUN apt-get install -y gawk libreadline6-dev libyaml-dev autoconf libgdbm-dev libncurses5-dev automake libtool bison libffi-dev
 RUN apt-get install -y libpq-dev xvfb qt5-default imagemagick libqt5webkit5-dev libldap2-dev libsasl2-dev wkhtmltopdf pdftk libmysqlclient-dev zip libgmp-dev
-RUN apt-get install -y postgresql-client
 RUN apt-get install -y openssh-client
+
+## Latest version of Postgres from their repos
+RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ xenial-pgdg main" > /etc/apt/sources.list.d/pgdg.list \
+    && wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
+RUN apt-get update
+RUN apt-get -y install postgresql-client
 
 ## Nodejs engine
 RUN curl -sL https://deb.nodesource.com/setup_7.x | bash -
@@ -49,9 +52,8 @@ RUN apt-get install -y ruby2.3 ruby2.3-dev
 
 RUN apt-get install -y gstreamer1.0-plugins-base gstreamer1.0-tools gstreamer1.0-x
 
-RUN gem install bundler
+RUN apt-get autoremove -y
 
-WORKDIR /app
-ONBUILD ADD . /app
+RUN gem install bundler
 
 CMD ["bash"]
