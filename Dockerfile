@@ -23,8 +23,11 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 RUN apt-get install -y build-essential
 RUN apt-get install -y wget links curl rsync bc git git-core apt-transport-https libxml2 libxml2-dev libcurl4-openssl-dev openssl
 RUN apt-get install -y gawk libreadline6-dev libyaml-dev autoconf libgdbm-dev libncurses5-dev automake libtool bison libffi-dev
-RUN apt-get install -y libpq-dev xvfb qt5-default imagemagick libqt5webkit5-dev libldap2-dev libsasl2-dev wkhtmltopdf pdftk libmysqlclient-dev zip libgmp-dev
-RUN apt-get install -y openssh-client
+RUN apt-get install -y libpq-dev xvfb imagemagick libldap2-dev libsasl2-dev wkhtmltopdf pdftk libmysqlclient-dev zip libgmp-dev
+RUN apt-get install -y openssh-client qt5-default libqt5webkit5-dev
+
+# Chromedriver
+RUN apt-get install -y chromium-chromedriver
 
 ## Latest version of Postgres from their repos
 RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ xenial-pgdg main" > /etc/apt/sources.list.d/pgdg.list \
