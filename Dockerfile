@@ -10,9 +10,9 @@ RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selectio
 # Set the locale
 RUN apt-get clean && apt-get update && apt-get install -y locales
 RUN locale-gen en_US.UTF-8
-RUN export LANGUAGE=en_US.UTF-8
-RUN export LANG=en_US.UTF-8
-RUN export LC_ALL=en_US.UTF-8
+ENV LANG en_US.UTF-8
+ENV LANGUAGE en_US.UTF-8
+ENV LC_ALL en_US.UTF-8
 RUN locale-gen en_US.UTF-8
 RUN dpkg-reconfigure locales
 
