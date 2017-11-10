@@ -26,7 +26,6 @@ RUN apt-get install -y gawk libreadline6-dev libyaml-dev autoconf libgdbm-dev li
 RUN apt-get install -y libpq-dev xvfb imagemagick libldap2-dev libsasl2-dev wkhtmltopdf pdftk libmysqlclient-dev zip libgmp-dev
 RUN apt-get install -y openssh-client qt5-default libqt5webkit5-dev
 
-# Chromedriver
 RUN apt-get install -y chromium-chromedriver
 
 ## Latest version of Postgres from their repos
@@ -54,6 +53,20 @@ RUN yarn global add phantomjs-prebuilt
 RUN apt-get install -y ruby2.3 ruby2.3-dev
 
 RUN apt-get install -y gstreamer1.0-plugins-base gstreamer1.0-tools gstreamer1.0-x
+
+# Chromedriver whole setup (TODO: get CHROME_DRIVER_VERSION from chromedriver.storage.googleapis.com/LATEST_RELEASE)
+ENV CHROME_DRIVER_VERSION=2.33
+
+RUN wget -N https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -P ~/
+RUN dpkg -i --force-depends ~/google-chrome-stable_current_amd64.deb
+RUN apt-get -f install -y
+RUN dpkg -i --force-depends ~/google-chrome-stable_current_amd64.deb
+
+RUN wget -N http://chromedriver.storage.googleapis.com/$CHROME_DRIVER_VERSION/chromedriver_linux64.zip -P ~/
+RUN unzip ~/chromedriver_linux64.zip -d ~/
+RUN rm ~/chromedriver_linux64.zip
+RUN mv -f ~/chromedriver /usr/local/bin/chromedriver
+RUN chmod 0755 /usr/local/bin/chromedriver
 
 RUN apt-get autoremove -y
 
