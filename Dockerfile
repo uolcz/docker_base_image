@@ -56,6 +56,9 @@ RUN apt-get install -y gstreamer1.0-plugins-base gstreamer1.0-tools gstreamer1.0
 
 # Chromedriver whole setup (TODO: get CHROME_DRIVER_VERSION from chromedriver.storage.googleapis.com/LATEST_RELEASE)
 ENV CHROME_DRIVER_VERSION=2.33
+ENV SELENIUM_STANDALONE_VERSION=3.4.0
+# TODO: get SELENIUM_STANDALONE_VERSION like so: $(echo "$SELENIUM_STANDALONE_VERSION" | cut -d"." -f-2)
+ENV SELENIUM_SUBDIR=3.4
 
 RUN wget -N https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -P ~/
 RUN dpkg -i --force-depends ~/google-chrome-stable_current_amd64.deb
@@ -67,6 +70,11 @@ RUN unzip ~/chromedriver_linux64.zip -d ~/
 RUN rm ~/chromedriver_linux64.zip
 RUN mv -f ~/chromedriver /usr/local/bin/chromedriver
 RUN chmod 0755 /usr/local/bin/chromedriver
+
+RUN wget -N http://selenium-release.storage.googleapis.com/$SELENIUM_SUBDIR/selenium-server-standalone-$SELENIUM_STANDALONE_VERSION.jar -P ~/
+RUN mv -f ~/selenium-server-standalone-$SELENIUM_STANDALONE_VERSION.jar /usr/local/bin/selenium-server-standalone.jar
+RUN chown root:root /usr/local/bin/selenium-server-standalone.jar
+RUN chmod 0755 /usr/local/bin/selenium-server-standalone.jar
 
 RUN apt-get autoremove -y
 
