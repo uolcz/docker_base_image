@@ -24,7 +24,7 @@ RUN apt-get install -y build-essential
 RUN apt-get install -y wget links curl rsync bc git git-core apt-transport-https libxml2 libxml2-dev libcurl4-openssl-dev openssl
 RUN apt-get install -y gawk libreadline6-dev libyaml-dev autoconf libgdbm-dev libncurses5-dev automake libtool bison libffi-dev
 RUN apt-get install -y libpq-dev xvfb imagemagick libldap2-dev libsasl2-dev wkhtmltopdf pdftk libmysqlclient-dev zip libgmp-dev
-RUN apt-get install -y openssh-client qt5-default libqt5webkit5-dev
+RUN apt-get install -y openssh-client
 
 RUN apt-get install -y chromium-chromedriver
 
@@ -47,8 +47,6 @@ RUN apt-get install -y yarn
 RUN apt-get install -y software-properties-common
 RUN apt-add-repository ppa:brightbox/ruby-ng
 RUN apt-get update
-
-RUN yarn global add phantomjs-prebuilt
 
 RUN apt-get install -y ruby2.3 ruby2.3-dev
 
