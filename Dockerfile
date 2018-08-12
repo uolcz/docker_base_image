@@ -1,4 +1,4 @@
-FROM ubuntu:xenial
+FROM ubuntu:bionic
 
 MAINTAINER  Andrej Antas <andrej@antas.cz>
 
@@ -20,36 +20,28 @@ ENV TZ=Europe/Prague
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 ## Default Packages
-RUN apt-get update
-RUN apt-get install -y build-essential software-properties-common
-RUN apt-get install -y wget links curl rsync bc git git-core apt-transport-https libxml2 libxml2-dev libcurl4-openssl-dev openssl
-RUN apt-get install -y gawk libreadline6-dev libyaml-dev autoconf libgdbm-dev libncurses5-dev automake libtool bison libffi-dev
-RUN apt-get install -y libpq-dev xvfb imagemagick libldap2-dev libsasl2-dev wkhtmltopdf pdftk libmysqlclient-dev zip libgmp-dev
-RUN apt-get install -y openssh-client
-
-RUN apt-get install -y chromium-chromedriver
-
-## Latest version of Postgres from their repos
-RUN add-apt-repository "deb http://apt.postgresql.org/pub/repos/apt/ xenial-pgdg main"
-RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
-RUN apt-get update
-RUN apt-get -y install postgresql-client
+RUN apt update && apt install -y build-essential software-properties-common wget links curl rsync bc git \ 
+    git-core apt-transport-https libxml2 libxml2-dev libcurl4-openssl-dev \
+    openssl gawk libreadline6-dev libyaml-dev autoconf libgdbm-dev libncurses5-dev \
+    automake libtool bison libffi-dev libpq-dev xvfb imagemagick libldap2-dev \
+    libsasl2-dev wkhtmltopdf zip libgmp-dev postgresql-client \
+    openssh-client \
+    chromium-chromedriver
 
 ## Nodejs engine
-RUN curl -sL https://deb.nodesource.com/setup_7.x | bash -
+RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
 RUN apt-get install -y nodejs
 
 ## YARN
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
 RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
-RUN apt-get update
-RUN apt-get install -y yarn
+RUN apt-get update && apt-get install -y yarn
 
-RUN apt-get install -y software-properties-common
-RUN apt-add-repository ppa:brightbox/ruby-ng
-RUN apt-get update
-
-RUN apt-get install -y ruby2.3 ruby2.3-dev
+## Ruby (must install libssl1.0-dev instead of libssl-dev for 2.3.x)
+RUN apt install -y libssl1.0-dev zlib1g-dev libgdbm5
+RUN wget http://ftp.ruby-lang.org/pub/ruby/2.3/ruby-2.3.7.tar.gz
+RUN tar -xzvf ruby-2.3.7.tar.gz
+RUN cd ruby-2.3.7/ && ./configure && make && make install
 
 RUN apt-get install -y gstreamer1.0-plugins-base gstreamer1.0-tools gstreamer1.0-x
 
