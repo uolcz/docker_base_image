@@ -37,11 +37,7 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
 RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
 RUN apt-get update && apt-get install -y yarn
 
-## Ruby (must install libssl1.0-dev instead of libssl-dev for 2.3.x)
-RUN apt install -y libssl1.0-dev zlib1g-dev libgdbm5
-RUN wget http://ftp.ruby-lang.org/pub/ruby/2.3/ruby-2.3.7.tar.gz
-RUN tar -xzvf ruby-2.3.7.tar.gz
-RUN cd ruby-2.3.7/ && ./configure && make && make install
+RUN apt install -y ruby2.5 
 
 RUN apt-get install -y gstreamer1.0-plugins-base gstreamer1.0-tools gstreamer1.0-x
 
