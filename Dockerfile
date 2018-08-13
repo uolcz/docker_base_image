@@ -24,9 +24,12 @@ RUN apt update && apt install -y build-essential software-properties-common wget
     git-core apt-transport-https libxml2 libxml2-dev libcurl4-gnutls-dev \
     openssl gawk libreadline6-dev libyaml-dev autoconf libgdbm-dev libncurses5-dev \
     automake libtool bison libffi-dev libpq-dev xvfb imagemagick libldap2-dev \
-    libsasl2-dev wkhtmltopdf zip libgmp-dev postgresql-client \
+    libsasl2-dev zip libgmp-dev postgresql-client \
     openssh-client \
     chromium-chromedriver
+
+RUN wget -q https://downloads.wkhtmltopdf.org/0.12/0.12.5/wkhtmltox_0.12.5-1.bionic_amd64.deb
+RUN apt install -y ./wkhtmltox_0.12.5-1.bionic_amd64.deb && rm wkhtmltox_0.12.5-1.bionic_amd64.deb
 
 ## Nodejs engine
 RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
