@@ -21,7 +21,7 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 ## Default Packages
 RUN apt update && apt install -y build-essential software-properties-common wget links curl rsync bc git \ 
-    git-core apt-transport-https libxml2 libxml2-dev libcurl4-openssl-dev \
+    git-core apt-transport-https libxml2 libxml2-dev libcurl4-gnutls-dev \
     openssl gawk libreadline6-dev libyaml-dev autoconf libgdbm-dev libncurses5-dev \
     automake libtool bison libffi-dev libpq-dev xvfb imagemagick libldap2-dev \
     libsasl2-dev wkhtmltopdf zip libgmp-dev postgresql-client \
