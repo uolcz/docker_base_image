@@ -42,9 +42,9 @@ RUN apt-get update && apt-get install -y yarn
 
 ## Ruby
 RUN apt install -y libssl-dev zlib1g-dev libgdbm5
-RUN wget http://ftp.ruby-lang.org/pub/ruby/2.4/ruby-2.4.4.tar.gz
-RUN tar -xzvf ruby-2.4.4.tar.gz
-RUN cd ruby-2.4.4/ && ./configure && make && make install
+RUN wget https://cache.ruby-lang.org/pub/ruby/2.6/ruby-2.6.0.tar.gz
+RUN tar -xzvf ruby-2.6.0.tar.gz
+RUN cd ruby-2.6.0/ && ./configure && make && make install
 
 RUN apt-get install -y gstreamer1.0-plugins-base gstreamer1.0-tools gstreamer1.0-x
 
