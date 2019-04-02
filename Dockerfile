@@ -54,10 +54,10 @@ RUN apt-get install -y ruby2.3 ruby2.3-dev
 RUN apt-get install -y gstreamer1.0-plugins-base gstreamer1.0-tools gstreamer1.0-x
 
 # Chromedriver whole setup (TODO: get CHROME_DRIVER_VERSION from chromedriver.storage.googleapis.com/LATEST_RELEASE)
-ENV CHROME_DRIVER_VERSION=2.42
-ENV SELENIUM_STANDALONE_VERSION=3.4.0
+ENV CHROME_DRIVER_VERSION=2.46
+ENV SELENIUM_STANDALONE_VERSION=3.9.1
 # TODO: get SELENIUM_STANDALONE_VERSION like so: $(echo "$SELENIUM_STANDALONE_VERSION" | cut -d"." -f-2)
-ENV SELENIUM_SUBDIR=3.4
+ENV SELENIUM_SUBDIR=3.9
 
 RUN wget -N https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -P ~/
 RUN dpkg -i --force-depends ~/google-chrome-stable_current_amd64.deb
